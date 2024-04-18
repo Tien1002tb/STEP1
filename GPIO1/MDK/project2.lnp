@@ -1,11 +1,13 @@
 --cpu Cortex-M3
 ".\code.o"
+".\systick_time.o"
 ".\misc.o"
 ".\stm32f10x_gpio.o"
 ".\stm32f10x_i2c.o"
 ".\stm32f10x_rcc.o"
 ".\startup_stm32f10x_md.o"
 ".\system_stm32f10x.o"
+".\stm32f10x_tim.o"
 --strict --scatter ".\project2.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

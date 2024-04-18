@@ -1,85 +1,75 @@
 #include "stm32f10x.h"
- 
-void Step_Motor_GPIO_Init(void);
 
-void motor_circle(int n, int direction);
-//IN4: PF4  d
-//IN3: PF3  c
-//IN2: PF2  b
-//IN1: PF1  a
+#define MOTOR_PIN1 GPIO_Pin_12
+#define MOTOR_PIN2 GPIO_Pin_13
+#define MOTOR_PIN3 GPIO_Pin_14
+#define MOTOR_PIN4 GPIO_Pin_15
+#define MOTOR_PORT GPIOB
+ GPIO_InitTypeDef GPIO_InitStructure;
+void delay_ms(uint32_t ms);
+void stepMotor(uint8_t step);
 
-u8 forward[4] = {0x03,0x06,0x0c,0x09}; 
-u8 reverse[4]= {0x03,0x09,0x0c,0x06}; 
-
-void Step_Motor_GPIO_Init(void)
-{
-    GPIO_InitTypeDef GPIO_InitStructure;
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOF, ENABLE);
-
+int main(void) {
+    // Enable GPIOA clock
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+    GPIO_InitStructure.GPIO_Pin = MOTOR_PIN1 | MOTOR_PIN2 | MOTOR_PIN3 | MOTOR_PIN4;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4|GPIO_Pin_3|GPIO_Pin_2|GPIO_Pin_1;
-    GPIO_Init(GPIOF, &GPIO_InitStructure);
+    GPIO_Init(MOTOR_PORT, &GPIO_InitStructure);
+
+    while (1) {
+			int i;
+        // Step the motor forward
+        for ( i = 0; i < 4; i++) {
+            stepMotor(i);
+            delay_ms(10); 
+        }
+        delay_ms(1000);
+
+        // Step the motor backward
+        for ( i = 3; i >= 0; i--) {
+            stepMotor(i);
+            delay_ms(10); 
+        }
+
+        delay_ms(1000);
+    }
+}
+void delay_ms(uint32_t ms) {
+    uint32_t i, j;
+    for (i = 0; i < ms; i++) {
+        for (j = 0; j < 7200; j++) {
+        }
+    }
 }
 
-void SetMotor(unsigned char InputData)
-{
-	if(InputData == 0x03)
-	{
-		GPIO_SetBits(GPIOF,GPIO_Pin_1);
-		GPIO_SetBits(GPIOF,GPIO_Pin_2);
-		GPIO_ResetBits(GPIOF,GPIO_Pin_3);
-		GPIO_ResetBits(GPIOF,GPIO_Pin_4);
-	}
-	else if(InputData == 0x06)
-	{
-		GPIO_ResetBits(GPIOF,GPIO_Pin_1);
-		GPIO_SetBits(GPIOF,GPIO_Pin_2);
-		GPIO_SetBits(GPIOF,GPIO_Pin_3);
-		GPIO_ResetBits(GPIOF,GPIO_Pin_4);
-	}
-	else if(InputData == 0x09)
-	{
-		GPIO_SetBits(GPIOF,GPIO_Pin_1);
-		GPIO_ResetBits(GPIOF,GPIO_Pin_2);
-		GPIO_ResetBits(GPIOF,GPIO_Pin_3);
-		GPIO_SetBits(GPIOF,GPIO_Pin_4);
-	}
-	else if(InputData == 0x0c)
-	{	
-		GPIO_ResetBits(GPIOF,GPIO_Pin_1);
-		GPIO_ResetBits(GPIOF,GPIO_Pin_2);
-		GPIO_SetBits(GPIOF,GPIO_Pin_3);
-		GPIO_SetBits(GPIOF,GPIO_Pin_4);
-	}
-	else if(InputData == 0x00)
-	{
-		GPIO_ResetBits(GPIOF,GPIO_Pin_1);
-		GPIO_ResetBits(GPIOF,GPIO_Pin_2);
-		GPIO_ResetBits(GPIOF,GPIO_Pin_3);
-		GPIO_ResetBits(GPIOF,GPIO_Pin_4);
-	}
-}
-
-void motor_circle(int n, int direction)
-{
-    int i, j;
-    for(i = 0; i < n * 8; i++)
-    {
-		for(j = 0; j < 4; j++)
-		{
-			if(1 == direction)
-			{
-				SetMotor(0x00);
-				SetMotor(forward[j]);
-			}
-			else
-			{
-				SetMotor(0x00);
-				SetMotor(reverse[j]);
-			}
-			
-//delay 
-		}
+void stepMotor(uint8_t step) {
+    switch(step) {
+        case 0:
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN1);
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN2);
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN3);
+            GPIO_SetBits(MOTOR_PORT, MOTOR_PIN4);
+            break;
+        case 1:
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN1);
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN2);
+            GPIO_SetBits(MOTOR_PORT, MOTOR_PIN3);
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN4);
+            break;
+        case 2:
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN1);
+            GPIO_SetBits(MOTOR_PORT, MOTOR_PIN2);
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN3);
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN4);
+            break;
+        case 3:
+            GPIO_SetBits(MOTOR_PORT, MOTOR_PIN1);
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN2);
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN3);
+            GPIO_ResetBits(MOTOR_PORT, MOTOR_PIN4);
+            break;
+        default:
+            break;
     }
 }
