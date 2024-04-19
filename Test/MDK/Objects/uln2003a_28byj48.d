@@ -1,0 +1,17 @@
+.\objects\uln2003a_28byj48.o: ..\USERS\uln2003a_28byj48.c
+.\objects\uln2003a_28byj48.o: ..\USERS\uln2003a_28byj48.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\stm32f10x.h
+.\objects\uln2003a_28byj48.o: .\RTE\_Target_1\RTE_Components.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm3.h
+.\objects\uln2003a_28byj48.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_version.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armcc.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\system_stm32f10x.h
+.\objects\uln2003a_28byj48.o: .\RTE\Device\STM32F103C6\stm32f10x_conf.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\StdPeriph_Driver\inc\stm32f10x_gpio.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\Include\stm32f10x.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\StdPeriph_Driver\inc\stm32f10x_rcc.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\StdPeriph_Driver\inc\stm32f10x_tim.h
+.\objects\uln2003a_28byj48.o: C:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.4.1\Device\StdPeriph_Driver\inc\misc.h
+.\objects\uln2003a_28byj48.o: ..\USERS\systick_time.h
